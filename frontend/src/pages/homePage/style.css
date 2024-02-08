@@ -1,0 +1,28 @@
+.box_title {
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    padding: 10px;
+    background-color: white;
+    margin-top: 40px;
+    width: 100%;
+    border-width: 1px;
+    border-color: cyan
+}
+
+.title_text {
+    font-size: 30px;
+    font-weight: bold;
+    color: #000000;
+    
+}
+
+.box_content {
+    background-color: white;
+    justify-content: center;
+    margin-top: 20px;
+    border-radius: 10px;
+    width: 100%;
+    border-width: 1px;
+    border-color: cyan
+}
