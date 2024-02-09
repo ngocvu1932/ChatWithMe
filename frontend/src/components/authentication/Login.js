@@ -12,58 +12,57 @@ const Login = () => {
   const navigate = useNavigate();
 
   const submitHandler = async() => {
-    // setLoading(true);
-    // if (!email || !password) {
-    //   toast({
-    //     title: 'Hãy điền đầy đủ thông tin!',
-    //     status: 'warning',
-    //     duration: 5000,
-    //     isClosable: true,
-    //     position: 'bottom'
-    //   });
-    //   setLoading(false);
-    //   return;
-    // }
+    setLoading(true);
+    if (!email || !password) {
+      toast({
+        title: 'Hãy điền đầy đủ thông tin!',
+        status: 'warning',
+        duration: 5000,
+        isClosable: true,
+        position: 'bottom'
+      });
+      setLoading(false);
+      return;
+    }
 
-    // try {
-    //   const config = {
-    //     headers: {
-    //       'Content-Type': 'application/json',
-    //     }
-    //   }
+    try {
+      const config = {
+        headers: {
+          'Content-type': 'application/json',
+        }
+      }
 
 
-    //   const { data } = await axios.post(
-    //     "/api/user/login", 
-    //     { email, password },
-    //     config
-    //   );
+      const { data } = await axios.post(
+        "/api/user/login", 
+        { email, password },
+        config
+      );
 
-    //   toast({
-    //     title: 'Đăng nhập thành công!',
-    //     status: 'success',
-    //     duration: 5000,
-    //     isClosable: true,
-    //     position: 'bottom'
-    //   });
+      toast({
+        title: 'Đăng nhập thành công!',
+        status: 'success',
+        duration: 10000,
+        isClosable: true,
+        position: 'bottom'
+      });
 
-    //   localStorage.setItem("userInfo", JSON.stringify(data));
-    //   console.log("2");
-    //   setLoading(false);
-    //   navigate("/chats");
-    // } catch (error) {
-    //   // console.log(error);
-    //   toast({
-        
-    //     title: 'Đăng nhập thất bại!',
-    //     status: 'error',
-    //     duration: 5000,
-    //     isClosable: true,
-    //     position: 'bottom'
-    //   });
-    //   setLoading(false);
-    // }
-
+      localStorage.setItem("userInfo", JSON.stringify(data));
+      // console.log("2");
+      setLoading(false);
+      navigate("/chats");
+    } catch (error) {
+      // console.log(error);
+      toast({
+        title: 'Đăng nhập thất bại!',
+        description: error.response.data.message,
+        status: 'error',
+        duration: 5000,
+        isClosable: true,
+        position: 'bottom'
+      });
+      setLoading(false);
+    }
   };
 
   
@@ -86,7 +85,7 @@ const Login = () => {
         </InputGroup>
       </FormControl>
 
-      <Button colorScheme='blue' width={'100%'}>
+      <Button colorScheme='blue' width={'100%'} onClick={submitHandler} isLoading={loading}>
         Đăng nhập
       </Button>
 

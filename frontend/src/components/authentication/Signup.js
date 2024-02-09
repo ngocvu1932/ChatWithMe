@@ -16,111 +16,111 @@ const Signup = () => {
 
 
   const postDetails = (pics) => {
-    // setLoading(true);
-    // if (pics === undefined) {
-    //   toast({
-    //     title: 'Hãy chọn hình ảnh!',
-    //     status: 'warning',
-    //     duration: 5000,
-    //     isClosable: true,
-    //     position: 'bottom'
-    //   });
-    //   return;
-    // }
+    setLoading(true);
+    if (pics === undefined) {
+      toast({
+        title: 'Hãy chọn hình ảnh!',
+        status: 'warning',
+        duration: 5000,
+        isClosable: true,
+        position: 'bottom'
+      });
+      return;
+    }
 
-    // if (pics.type ==="image/jpeg" || pics.type === "image/png") {
-    //   const data = new FormData();
-    //   data.append('file', pics);
-    //   data.append('upload_preset', "chat-app");
-    //   data.append('cloud_name', "ngocvu1932");
-    //   fetch("https://api.cloudinary.com/v1_1/ngocvu1932/image/upload", {
-    //     method: 'post',
-    //     body: data
-    //   })
-    //   .then((res) => res.json())
-    //   .then((data) => {
-    //     setPic(data.url.toString());
-    //     // console.log(data.url.toString());
-    //     setLoading(false);
-    //   })
-    //   .catch((err) => {
-    //     console.log(err);
-    //     setLoading(false);
-    //   });
-    // } else {
-    //   toast({
-    //     title: 'Hãy chọn hình ảnh!',
-    //     status: 'warning',
-    //     duration: 5000,
-    //     isClosable: true,
-    //     position: 'bottom'
-    //   });
-    //   setLoading(false);
-    //   return;
-    // }
+    if (pics.type ==="image/jpeg" || pics.type === "image/png") {
+      const data = new FormData();
+      data.append('file', pics);
+      data.append('upload_preset', "chat-app");
+      data.append('cloud_name', "ngocvu1932");
+      fetch("https://api.cloudinary.com/v1_1/ngocvu1932/image/upload", {
+        method: 'post',
+        body: data
+      })
+      .then((res) => res.json())
+      .then((data) => {
+        setPic(data.url.toString());
+        console.log(data.url.toString());
+        setLoading(false);
+      })
+      .catch((err) => {
+        console.log(err);
+        setLoading(false);
+      });
+    } else {
+      toast({
+        title: 'Hãy chọn hình ảnh!',
+        status: 'warning',
+        duration: 5000,
+        isClosable: true,
+        position: 'bottom'
+      });
+      setLoading(false);
+      return;
+    }
   };
 
   const submitHandler = async () => {
-    // setLoading(true);
-    // if (!name || !email || !password || !confirmPassword) {
-    //   toast({
-    //     title: 'Hãy điền đầy đủ thông tin!',
-    //     status: 'warning',
-    //     duration: 5000,
-    //     isClosable: true,
-    //     position: 'bottom'
-    //   });
-    //   setLoading(false);
-    //   return;
-    // }
+    setLoading(true);
+    if (!name || !email || !password || !confirmPassword) {
+      toast({
+        title: 'Hãy điền đầy đủ thông tin!',
+        status: 'warning',
+        duration: 5000,
+        isClosable: true,
+        position: 'bottom'
+      });
+      setLoading(false);
+      return;
+    }
 
-    // if (password !== confirmPassword) {
-    //   toast({
-    //     title: 'Mật khẩu không khớp!',
-    //     status: 'warning',
-    //     duration: 5000,
-    //     isClosable: true,
-    //     position: 'bottom'
-    //   });
-    //   setLoading(false);
-    //   return;
-    // }
+    if (password !== confirmPassword) {
+      toast({
+        title: 'Mật khẩu không khớp!',
+        status: 'warning',
+        duration: 5000,
+        isClosable: true,
+        position: 'bottom'
+      });
+      setLoading(false);
+      return;
+    }
 
-    // console.log(name, email, password, pic);
+    console.log(name, email, password, pic);
 
-    // try {
-    //   const config = {
-    //     headers: {
-    //       "Content-Type": "application/json"
-    //     },
-    //   };
+    try {
+      const config = {
+        headers: {
+          "Content-type": "application/json"
+        },
+      };
 
-    //   const {data} = await axios.post("/api/user", {name, email, password, pic}, config);
+      const {data} = await axios.post("/api/user", {name, email, password, pic}, config);
 
-    //   toast({
-    //     title: "Đăng ký thành công!",
-    //     status: "success",
-    //     duration: 5000,
-    //     isClosable: true,
-    //     position: "bottom"
-    //   });
+      toast({
+        title: "Đăng ký thành công!",
+        status: "success",
+        duration: 10000,
+        isClosable: true,
+        position: "bottom"
+      });
 
-    //   localStorage.setItem("userInfo", JSON.stringify(data));
-    //   setLoading(false);
-    //   navigate("/chats");
-    // } catch (error) {
-    //   // console.log(error);
-    //   toast({
-    //     title: "Đăng ký thất bại!",
-        
-    //     status: "error",
-    //     duration: 5000, 
-    //     isClosable: true,
-    //     position: "bottom"
-    //   });
-    //   // console.log("OWr ddaya ne");
-    //   setLoading(false);
-    // }
+      localStorage.setItem("userInfo", JSON.stringify(data));
+      setLoading(false);
+      navigate("/");
+    } catch (error) {
+      // console.log(error);
+      toast({
+        title: "Đăng ký thất bại!",
+        description: error.response.data.message,
+        status: "error",
+        duration: 5000, 
+        isClosable: true,
+        position: "bottom"
+      });
+      // console.log("OWr ddaya ne");
+      setLoading(false);
+    }
   };
 
 
@@ -165,7 +165,7 @@ const Signup = () => {
         <Input type='file' padding={1} accept='image/*' onChange={(e)=> postDetails(e.target.files[0])} ></Input>
       </FormControl>
 
-      <Button colorScheme='blue' width={'100%'}  >
+      <Button colorScheme='blue' width={'100%'} onClick={submitHandler} isLoading={loading} >
         Đăng ký
       </Button>
     </VStack>
